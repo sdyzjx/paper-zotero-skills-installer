@@ -9,9 +9,25 @@ description: 在 IEEE Xplore 中检索并保存论文到 Zotero（必须包含 P
 执行一条稳定的“检索 -> 机构登录 -> 获取 PDF -> Zotero 入库+附件 -> 校验”流水线。
 优先使用浏览器会话拿 PDF（保留机构登录 cookie），再用 Zotero 本地 Connector API 保存，避免仅靠插件快捷键的不确定性。
 
-## Fixed Credentials (Fuzhou University)
-- 账号: `2501120111`
-- 密码: `Fzudjzb308$`
+## Credentials Setup
+
+This skill requires institutional credentials to access IEEE Xplore full-text PDFs.
+Credentials are read from environment variables — **never hardcode them in this file**.
+
+Set the following in your shell profile (`~/.zshrc` or `~/.bashrc`):
+
+```bash
+export IEEE_INSTITUTION_USERNAME="your_student_id"
+export IEEE_INSTITUTION_PASSWORD="your_password"
+```
+
+Then reload: `source ~/.zshrc`
+
+The agent will read `$IEEE_INSTITUTION_USERNAME` and `$IEEE_INSTITUTION_PASSWORD` at runtime.
+If either variable is unset, the agent will prompt you to provide them before proceeding.
+
+> **Why env vars?** Credentials in SKILL.md are committed to git and visible to anyone with
+> repo access. Environment variables keep secrets off disk and out of version control.
 
 ## Fast Workflow
 1. 浏览器连接检查（chrome-osascript）
@@ -29,14 +45,14 @@ description: 在 IEEE Xplore 中检索并保存论文到 Zotero（必须包含 P
   - 若无结果，改用核心关键词（如 `Phase-to-Phase Current Fault Components`）定位。
 - 打开目标详情页（形如 `https://ieeexplore.ieee.org/document/<ARNUMBER>`）。
 
-3. Institutional Sign In（福州大学）
+3. Institutional Sign In
 - 在论文页点击 `Institutional Sign In`。
 - 点击 `Add or Change Institution`。
-- 选择 `Fuzhou University`。
-- 跳转福大统一认证后：
-  - 用户名填 `2501120111`
-  - 密码填 `Fzudjzb308$`
-  - 点击 `立即登录`
+- 搜索并选择你的机构（如 `Fuzhou University`）。
+- 跳转机构统一认证后：
+  - 用户名填 `$IEEE_INSTITUTION_USERNAME`（从环境变量读取）
+  - 密码填 `$IEEE_INSTITUTION_PASSWORD`（从环境变量读取）
+  - 点击登录按钮（各机构标签不同，如 `立即登录`）
 - 若出现条款页：勾选同意并点 `提交`。
 - 若出现信息发布页：点击 `接受`。
 - 返回 IEEE 后，页面右上应出现 `Sign Out`（表示已登录机构）。
