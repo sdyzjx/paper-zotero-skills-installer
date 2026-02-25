@@ -1,0 +1,4 @@
+interface:
+  display_name: "Zotero论文库"
+  short_description: "直接读取本地 zotero.sqlite，浏览、阅读、搜索 Zotero 论文库"
+  default_prompt: "直接读取本地 zotero.sqlite，查看我的论文库，并按主题搜索相关论文"
