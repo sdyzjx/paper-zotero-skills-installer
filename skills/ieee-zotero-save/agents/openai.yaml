@@ -1,0 +1,4 @@
+interface:
+  display_name: "IEEE保存到Zotero"
+  short_description: "在IEEE Xplore检索、机构登录并保存条目+PDF到Zotero"
+  default_prompt: "在IEEE Xplore找到目标论文，必要时完成福州大学机构登录，并将文献及PDF保存到Zotero。"

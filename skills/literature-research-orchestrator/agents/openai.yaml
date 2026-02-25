@@ -1,0 +1,4 @@
+interface:
+  display_name: "Literature Research Orchestrator"
+  short_description: "End-to-end paper survey, filing, and reporting workflow"
+  default_prompt: "Use $literature-research-orchestrator to run an end-to-end paper survey with scope clarification, Zotero filing, and report generation."
